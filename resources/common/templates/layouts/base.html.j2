@@ -1,0 +1,23 @@
+{% from common_macro('navbar') import navbar %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title required %}{% endblock %} · Flask Base</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ common_css('bootstrap.min') }}">
+    {% block style %}{% endblock %}
+</head>
+
+<body>
+    <main class="container my-3 my-md-5">
+        {% block main required %}{% endblock %}
+    </main>
+    <script src="{{ common_js('bootstrap.bundle.min') }}"></script>
+    {% block script %}{% endblock %}
+</body>
+
+</html>
