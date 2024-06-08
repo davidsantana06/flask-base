@@ -11,10 +11,9 @@ def configure_modules(app: Flask) -> None:
         if '__init__.py' in listdir(module_folder):
             module_path = APP_MODULE_PATH.format(module_name)
             module = import_module(module_path)
-            for _, item in module.__dict__.items():
-                if isinstance(item, Blueprint):
-                    item.static_folder = RES_MODULE_STATIC_FOLDER.format(item.name)
-                    item.static_url_path = f'/{module_path}'
-                    item.template_folder = RES_MODULE_TEMPLATES_FOLDER.format(item.name)
-                    app.register_blueprint(item)
-                    break
+            blueprint = next((item for item in module.__dict__.values() if isinstance(item, Blueprint)), None)
+            if blueprint is not None:
+                blueprint.static_folder = RES_MODULE_STATIC_FOLDER.format(blueprint.name)
+                blueprint.static_url_path = f'/{module_path}'
+                blueprint.template_folder = RES_MODULE_TEMPLATES_FOLDER.format(blueprint.name)
+                app.register_blueprint(blueprint)
