@@ -1,7 +1,7 @@
 from flask import Flask
 
 from app.extensions import database, bcrypt, csrf, login_manager, socket_io
-from app.models.data_entities import User
+from app.models import User
 
 
 def configure_extensions(app: Flask) -> None:
