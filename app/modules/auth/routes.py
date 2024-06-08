@@ -1,7 +1,8 @@
-from flask import request
+from flask import (
+    redirect, url_for,
+    request
+)
 from flask_login import logout_user, current_user
-
-from app.lib.core.redirect import redirect
 
 from . import auth
 
@@ -12,15 +13,15 @@ def before_request():
     is_user_authenticated = bool(current_user.is_authenticated)
 
     if is_checkable_endpoint and is_user_authenticated:
-        return redirect('home.index')
+        return redirect(url_for('home.index'))
 
 
 @auth.get('/login')
 def login():
-    return redirect('home.index')
+    return redirect(url_for('home.index'))
 
 
 @auth.get('/logout')
 def logout():
     logout_user()
-    return redirect('.login')
+    return redirect(url_for('.login'))

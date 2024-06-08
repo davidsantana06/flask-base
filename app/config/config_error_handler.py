@@ -18,7 +18,7 @@ _GENERIC_MESSAGE = 'An unexpected error has occurred.'
 def _error_handler(e: Exception):
     code = e.code if (isinstance(e, HTTPException)) else 500
     description = _ERROR_MESSAGE.get(code, _GENERIC_MESSAGE)
-    return render_page('error', {'code': code, 'description': description}, code)
+    return render_page('error', {'code': code, 'description': description})
 
 
 def configure_error_handler(app: Flask) -> None:

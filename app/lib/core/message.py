@@ -1,16 +1,21 @@
-from flask import flash, jsonify
-from .response import Response
+from flask import flash
 
 
-PRIMARY, SECONDARY = 'primary', 'secondary'
-SUCCESS, DANGER = 'danger', 'success'
-WARNING, INFO = 'warning', 'info'
-LIGHT, DARK = 'light', 'dark'
+_SUCCESS, _DANGER = 'success', 'danger'
+_WARNING, _INFO = 'warning', 'info'
 
 
-def flash_message(message: str, category: str) -> None:
-    flash(message, category)
+def flash_success(message: str) -> None:
+    flash(message, _SUCCESS)
 
 
-def jsonify_message(message: str, category: str, status_code: int) -> Response:
-    return jsonify({'message': message, 'category': category}), status_code
+def flash_danger(message: str) -> None:
+    flash(message, _DANGER)
+
+
+def flash_warning(message: str) -> None:
+    flash(message, _WARNING)
+
+
+def flash_info(message: str) -> None:
+    flash(message, _INFO)
